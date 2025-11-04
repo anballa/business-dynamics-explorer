@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.30"
+						"string" : "3.20"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "bd_explorer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-bd_explorer-Debug-c3db35a89b8ccbe33672.json",
+					"jsonFile" : "target-bd_explorer-Debug-38418729d0aac255e8b1.json",
 					"name" : "bd_explorer",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/anany/Downloads/UF/COP3530/bd-explorer/cmake-build-debug",
-		"source" : "C:/Users/anany/Downloads/UF/COP3530/bd-explorer"
+		"build" : "C:/Users/anany/Downloads/UF/COP3530/bd-explorer/business-dynamics-explorer/cmake-build-debug",
+		"source" : "C:/Users/anany/Downloads/UF/COP3530/bd-explorer/business-dynamics-explorer"
 	},
 	"version" : 
 	{

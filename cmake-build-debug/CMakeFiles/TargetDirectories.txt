@@ -1,3 +1,3 @@
-C:/Users/anany/Downloads/UF/COP3530/bd-explorer/cmake-build-debug/CMakeFiles/bd_explorer.dir
-C:/Users/anany/Downloads/UF/COP3530/bd-explorer/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/anany/Downloads/UF/COP3530/bd-explorer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/anany/Downloads/UF/COP3530/bd-explorer/business-dynamics-explorer/cmake-build-debug/CMakeFiles/bd_explorer.dir
+C:/Users/anany/Downloads/UF/COP3530/bd-explorer/business-dynamics-explorer/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/anany/Downloads/UF/COP3530/bd-explorer/business-dynamics-explorer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

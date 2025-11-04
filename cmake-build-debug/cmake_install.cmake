@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/anany/Downloads/UF/COP3530/bd-explorer
+# Install script for directory: C:/Users/anany/Downloads/UF/COP3530/bd-explorer/business-dynamics-explorer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -52,6 +52,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "C:/Users/anany/Downloads/UF/COP3530/bd-explorer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/anany/Downloads/UF/COP3530/bd-explorer/business-dynamics-explorer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
