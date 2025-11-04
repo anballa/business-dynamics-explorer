@@ -5,4 +5,14 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#endif //UTILS_H
+#include "HashMap.h"
+#include "BTree.h"
+#include "Record.h"
+#include <string>
+
+void loadDataFromCSV(const std::string &filename, HashMap &hashTable, BTree &bTree);
+void generateRandomData(HashMap &hashTable, BTree &bTree, int count);
+void mainMenu(HashMap &hashTable, BTree &bTree);
+void comparePerformance(HashMap &hashTable, BTree &bTree);
+
+#endif
