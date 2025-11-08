@@ -104,3 +104,15 @@ std::vector<std::string> HashMap::getAllKeys() const {
     return keys;
 }
 
+std::vector<std::pair<std::string, Record>> HashMap::searchPrefix(const std::string& prefix) const {
+    std::vector<std::pair<std::string, Record>> results;
+    for (const auto &bucket : table) {
+        for (const auto &entry : bucket) {
+            if (entry.first.substr(0, prefix.length()) == prefix) {
+                results.push_back(entry);
+            }
+        }
+    }
+    return results;
+}
+
