@@ -176,13 +176,11 @@ void BTreeNode::insertNonFull(const string& key, const Record& value) {
     int i = (int)keys.size() - 1;
 
     if (leaf) {
-        // Find correct position for new key
         while (i >= 0 && keys[i] > key)
             i--;
         keys.insert(keys.begin() + i + 1, key);
         values.insert(values.begin() + i + 1, value);
     } else {
-        // Find the child that will get the new key
         while (i >= 0 && keys[i] > key)
             i--;
         i++;
@@ -198,25 +196,21 @@ void BTreeNode::insertNonFull(const string& key, const Record& value) {
 void BTreeNode::splitChild(int i, BTreeNode* y) {
     BTreeNode* z = new BTreeNode(y->t, y->leaf);
 
-    // Copy the last (t - 1) keys and values of y to z
     for (int j = 0; j < t - 1; j++) {
         z->keys.push_back(y->keys[j + t]);
         z->values.push_back(y->values[j + t]);
     }
 
-    // Copy the last t children of y to z
     if (!y->leaf) {
         for (int j = 0; j < t; j++)
             z->children.push_back(y->children[j + t]);
     }
 
-    // Reduce y’s size
     y->keys.resize(t - 1);
     y->values.resize(t - 1);
     if (!y->leaf)
         y->children.resize(t);
 
-    // Insert z into children of this node
     children.insert(children.begin() + i + 1, z);
     keys.insert(keys.begin() + i, y->keys[t - 1]);
     values.insert(values.begin() + i, y->values[t - 1]);
@@ -263,4 +257,45 @@ Record* BTree::search(const string& key) {
             return &node->values[i];
     }
     return nullptr;
+}
+
+void BTreeNode::collectPrefix(const string& prefix, vector<pair<string, Record>>& results) {
+    for (size_t i = 0; i < keys.size(); i++) {
+        if (keys[i].substr(0, prefix.length()) == prefix) {
+            results.push_back({keys[i], values[i]});
+        }
+    }
+    
+
+    if (!leaf) {
+        for (size_t i = 0; i < children.size(); i++) {
+            children[i]->collectPrefix(prefix, results);
+        }
+    }
+}
+
+vector<pair<string, Record>> BTree::searchPrefix(const string& prefix) {
+    vector<pair<string, Record>> results;
+    if (root == nullptr) return results;
+    root->collectPrefix(prefix, results);
+    return results;
+}
+
+void BTreeNode::traverse() {
+    int i;
+    for (i = 0; i < (int)keys.size(); i++) {
+        if (!leaf) {
+            children[i]->traverse();
+        }
+        cout << " " << keys[i];
+    }
+    if (!leaf) {
+        children[i]->traverse();
+    }
+}
+
+void BTree::traverse() {
+    if (root != nullptr) {
+        root->traverse();
+    }
 }
