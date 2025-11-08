@@ -34,6 +34,7 @@ public:
     void borrowFromPrev(int idx);
     void borrowFromNext(int idx);
     void merge(int idx);
+    void collectPrefix(const string& prefix, vector<pair<string, Record>>& results);
 };
 
 class BTree {
@@ -45,7 +46,7 @@ public:
     Record* search(const string& key);
     void traverse();
     void remove(const string& key);
+    vector<pair<string, Record>> searchPrefix(const string& prefix);
 };
 
 #endif
-
