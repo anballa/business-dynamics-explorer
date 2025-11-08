@@ -14,5 +14,8 @@ void loadDataFromCSV(const std::string &filename, HashMap &hashTable, BTree &bTr
 void generateRandomData(HashMap &hashTable, BTree &bTree, int count);
 void mainMenu(HashMap &hashTable, BTree &bTree);
 void comparePerformance(HashMap &hashTable, BTree &bTree);
+void showAllRecordsForState(HashMap &hashTable, BTree &bTree);
+void showTopBottomJobCreation(HashMap &hashTable, BTree &bTree);
+void showDatasetStatistics(HashMap &hashTable, BTree &bTree);
 
 #endif
