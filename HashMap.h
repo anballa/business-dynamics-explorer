@@ -24,7 +24,9 @@ public:
     void remove(const string &key);
     void display();
     std::vector<std::string> getAllKeys() const;
+    std::vector<std::pair<std::string, Record>> searchPrefix(const std::string& prefix) const;
 
 };
 
 #endif
+
