@@ -15,6 +15,7 @@
 #include <map>
 #include <set>
 #include <climits>
+#include <unordered_map>
 
 using namespace std::chrono;
 using namespace std;
@@ -145,9 +146,9 @@ void mainMenu(HashMap &hashTable, BTree &bTree) {
     int year;
 
     while (true) {
-        cout << "\n============================================================================================================================\n";
+        cout << "\n========================================================================================================================\n";
         cout << "                                    BUSINESS DYNAMICS DATA EXPLORER\n";
-        cout << "============================================================================================================================\n";
+        cout << "========================================================================================================================\n";
         cout << "Choose an option below:\n";
         cout << "[1] Insert New Record\n";
         cout << "[2] Search by State and Year\n";
@@ -157,7 +158,7 @@ void mainMenu(HashMap &hashTable, BTree &bTree) {
         cout << "[6] Dataset Statistics\n";
         cout << "[7] Compare Data Structures\n";
         cout << "[8] Exit\n";
-        cout << "============================================================================================================================\n";
+        cout << "========================================================================================================================\n";
         cout << "Enter choice: ";
         cin >> choice;
 
@@ -384,9 +385,9 @@ void showAllRecordsForState(HashMap &hashTable, BTree &bTree) {
         return;
     }
     
-    cout << "\n============================================================================================================================\n";
+    cout << "\n========================================================================================================================\n";
     cout << "                                    All Records for " << state << "\n";
-    cout << "============================================================================================================================\n";
+    cout << "========================================================================================================================\n";
     cout << left
          << setw(12) << "State"
          << setw(6)  << "Year"
@@ -428,7 +429,7 @@ void showAllRecordsForState(HashMap &hashTable, BTree &bTree) {
              << endl;
     }
     
-    cout << "============================================================================================================================\n";
+    cout << "========================================================================================================================\n";
     cout << "Total records found: " << hashResults.size() << "\n";
     cout << "Search Time (Hash Table): " << fixed << setprecision(3) << hashTime << " ms\n";
     cout << "Search Time (BTree): " << fixed << setprecision(3) << btreeTime << " ms\n";
@@ -450,6 +451,22 @@ void showTopBottomJobCreation(HashMap &hashTable, BTree &bTree) {
             allRecords.push_back({key, *rec});
         }
     }
+
+    // Prevent duplicates
+    unordered_map<string, Record> bestPerState;
+    for (const auto& entry : allRecords) {
+        const string& state = entry.second.state;
+        // Keep the record with the highest jobCreation for each state
+        if (!bestPerState.count(state) || entry.second.jobCreation > bestPerState[state].jobCreation) {
+            bestPerState[state] = entry.second;
+        }
+    }
+
+    // Rebuild allRecords with only one best record per state
+    allRecords.clear();
+    for (const auto& best : bestPerState) {
+        allRecords.push_back({best.first, best.second});
+    }
     
     // Sort by job creation (descending for top, ascending for bottom)
     sort(allRecords.begin(), allRecords.end(),
@@ -457,18 +474,18 @@ void showTopBottomJobCreation(HashMap &hashTable, BTree &bTree) {
              return a.second.jobCreation > b.second.jobCreation;
          });
     
-    cout << "\n============================================================================================================================\n";
+    cout << "\n========================================================================================================================\n";
     cout << "                                    TOP 5 BY JOB CREATION\n";
-    cout << "============================================================================================================================\n";
+    cout << "========================================================================================================================\n";
     cout << left
          << setw(15) << "State"
          << setw(8)  << "Year"
          << setw(15) << "Job Creation"
-         << setw(15) << "Job Creation Rate"
-         << setw(15) << "Net Job Creation"
-         << setw(12) << "Number of Firms"
+         << setw(20) << "Job Creation Rate"
+         << setw(20) << "Net Job Creation "
+         << setw(20) << "Number of Firms"
          << endl;
-    cout << string(80, '-') << endl;
+    cout << string(93, '-') << endl;
     
     int count = min(5, (int)allRecords.size());
     for (int i = 0; i < count; i++) {
@@ -476,9 +493,9 @@ void showTopBottomJobCreation(HashMap &hashTable, BTree &bTree) {
         cout << left << setw(15) << r.state
              << setw(8)  << r.year
              << setw(15) << r.jobCreation
-             << setw(15) << fixed << setprecision(2) << r.jobCreationRate
-             << setw(15) << r.netJobCreation
-             << setw(12) << r.numberOfFirms
+             << setw(20) << fixed << setprecision(2) << r.jobCreationRate
+             << setw(20) << r.netJobCreation
+             << setw(20) << r.numberOfFirms
              << endl;
     }
     
@@ -488,30 +505,30 @@ void showTopBottomJobCreation(HashMap &hashTable, BTree &bTree) {
              return a.second.jobCreation < b.second.jobCreation;
          });
     
-    cout << "\n============================================================================================================================\n";
+    cout << "\n========================================================================================================================\n";
     cout << "                                    BOTTOM 5 BY JOB CREATION\n";
-    cout << "============================================================================================================================\n";
+    cout << "========================================================================================================================\n";
     cout << left
          << setw(15) << "State"
          << setw(8)  << "Year"
          << setw(15) << "Job Creation"
-         << setw(15) << "Job Creation Rate"
-         << setw(15) << "Net Job Creation"
-         << setw(12) << "Number of Firms"
+         << setw(20) << "Job Creation Rate"
+         << setw(20) << "Net Job Creation"
+         << setw(20) << "Number of Firms"
          << endl;
-    cout << string(80, '-') << endl;
+    cout << string(93, '-') << endl;
     
     for (int i = 0; i < count; i++) {
         const Record &r = allRecords[i].second;
         cout << left << setw(15) << r.state
              << setw(8)  << r.year
              << setw(15) << r.jobCreation
-             << setw(15) << fixed << setprecision(2) << r.jobCreationRate
-             << setw(15) << r.netJobCreation
-             << setw(12) << r.numberOfFirms
+             << setw(20) << fixed << setprecision(2) << r.jobCreationRate
+             << setw(20) << r.netJobCreation
+             << setw(20) << r.numberOfFirms
              << endl;
     }
-    cout << "============================================================================================================================\n";
+    cout << "========================================================================================================================\n";
 }
 
 void showDatasetStatistics(HashMap &hashTable, BTree &bTree) {
@@ -575,9 +592,9 @@ void showDatasetStatistics(HashMap &hashTable, BTree &bTree) {
         }
     }
     
-    cout << "\n============================================================================================================================\n";
+    cout << "\n========================================================================================================================\n";
     cout << "                                    DATASET STATISTICS\n";
-    cout << "============================================================================================================================\n";
+    cout << "========================================================================================================================\n";
     cout << left << setw(40) << "Total Records:" << right << setw(20) << totalRecords << "\n";
     cout << left << setw(40) << "Unique States:" << right << setw(20) << uniqueStates.size() << "\n";
     cout << left << setw(40) << "Year Range:" << right << setw(20) << (to_string(minYear) + " - " + to_string(maxYear)) << "\n";
@@ -587,6 +604,6 @@ void showDatasetStatistics(HashMap &hashTable, BTree &bTree) {
     cout << left << setw(40) << "Total Net Job Creation:" << right << setw(20) << totalNetJobCreation << "\n";
     cout << left << setw(40) << fixed << setprecision(2) << "Average Job Creation Rate:" << right << setw(20) << avgJobCreationRate << "%\n";
     cout << left << setw(40) << "State with Most Records:" << right << setw(20) << (mostRecordsState + " (" + to_string(maxStateCount) + " records)") << "\n";
-    cout << "============================================================================================================================\n";
+    cout << "========================================================================================================================\n";
 }
 
